@@ -6,7 +6,7 @@ services:
     container_name: worker
     volumes:
       - worker-data:/node/
-      - ./nimiq/master/worker.conf:/node/config/worker.conf
+      - ./configuration/worker/server.conf:/node/config/server.conf
     networks:
       - nimiq
 
@@ -15,7 +15,7 @@ services:
     container_name: master
     volumes:
       - master-data:/node/
-      - ./nimiq/master:/node/config  
+      - ./configuration/master/server.conf:/node/config/server.conf
     networks:
       - nimiq
 
@@ -57,6 +57,7 @@ services:
       - nimiq
     volumes:
       - payout-data:/node/
+      - ./configuration/payout/server.conf:/node/config/server.conf
 
 volumes:
   worker-data:
