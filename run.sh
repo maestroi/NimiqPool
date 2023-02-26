@@ -9,7 +9,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 
 # Create the nimiq user
-sudo adduser nimiq --home /home/nimiq --disabled-password
+sudo adduser  --home /home/nimiq --disabled-password --gecos "" nimiq
 
 # Add the nimiq user to the docker group
 sudo usermod -aG docker nimiq

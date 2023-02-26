@@ -36,6 +36,7 @@ steps:
 - Have fun :)
   
 ## Run
+- curl -sSL https://raw.githubusercontent.com/maestroi/NimiqPool/master/run.sh | sudo bash
 - Run `sudo docker-compose up -d`, this is done in /home/USER/node directory of the created user.
 - Run `sudo docker-compose logs --follow` to see logging.
 - In a browser open https://YOURDOMAIN.COM:8444 to see the pool page!
@@ -43,7 +44,7 @@ steps:
 ## LIMITED SUPPORT.
 there is limited support on this project, i will keep it up to date if i feel like it :-).
 
-Donations on: NQ29 Q4X7 JS4A 5Y7E 6ATR B44S 5FMC UNMR 3A2H are appreciated. 
+Donations on: NQ87 T9QB 9RR6 5A4F EV3U 320T 2XK9 QGYS 2MJA are appreciated. 
 
 # Changes:
 Added:
