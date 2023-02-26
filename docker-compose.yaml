@@ -58,12 +58,6 @@ services:
     volumes:
       - payout-data:/node/
 
-  api:
-    image: your-api-image
-    container_name: api
-    networks:
-      - nimiq
-
 volumes:
   worker-data:
   master-data:
