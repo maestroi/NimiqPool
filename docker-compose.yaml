@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  worker:
+    image: maestroi/nimiq-node:latest
+    container_name: worker
+    volumes:
+      - worker-data:/node/
+      - ./nimiq/master/worker.conf:/node/config/worker.conf
+    networks:
+      - nimiq
+
+  master:
+    image: maestroi/nimiq-node:latest
+    container_name: master
+    volumes:
+      - master-data:/node/
+      - ./nimiq/master:/node/config  
+    networks:
+      - nimiq
+
+  db:
+    image: mariadb:latest
+    container_name: mariadb
+    environment:
+      MARIADB_DATABASE: "default"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MARIADB_USER: "pool"
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db-data:/node/
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./configuration/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - nimiq
+
+  traefik:
+    image: traefik:v2.9
+    container_name: traefik
+    command:
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - nimiq
+
+  payout:
+    image: maestroi/payout-node:latest
+    container_name: payout
+    networks:
+      - nimiq
+    volumes:
+      - payout-data:/node/
+
+  api:
+    image: your-api-image
+    container_name: api
+    networks:
+      - nimiq
+
+volumes:
+  worker-data:
+  master-data:
+  payout-data:
+  db-data:
+
+networks:
+  nimiq:
